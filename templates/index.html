@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block head %}
+<title>To-Do-App</title>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <!-- <h1 style="text-align: center;">Task Manager</h1> -->
+  {% if tasks|length < 1 %}
+  <h4>There are no tasks yet. Create your tasks below!</h4>
+  {% else %}
+  <table class="table table-success table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Task</th>
+        <th scope="col">Date</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks%}
+      <tr>
+              <th scope="row">{{task.id}}</th>
+
+        <td>{{task.content}}</th>
+        <td>{{task.date_created}}</td>
+        <td><a href="/update/{{task.id}}" type="button" class="btn btn-secondary">Update</a></td>
+        <td><a href="/delete/{{task.id}}"  type="button" class="btn btn-danger">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <form class="row" action="/" method="POST">
+      <div class="col-auto">
+        <input type="text" class="form-control" id="content" name="content" />
+      </div>        
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary ">Add</button>
+      </div>  
+  </form>
+</div>
+
+{% endblock %}
